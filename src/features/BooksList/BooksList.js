@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 import BookItem from '../../views/BookItem/BookItem';
 import BooksForm from '../BookForm/BookForm';
 
