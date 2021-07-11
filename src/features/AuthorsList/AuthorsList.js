@@ -1,4 +1,5 @@
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 function AuthorsList({ books }) {
@@ -19,4 +20,7 @@ AuthorsList.propTypes = {
   books: PropTypes.array.isRequired,
 };
 
-export default AuthorsList;
+const mapStateToProps = (state) => ({
+  books: state.books,
+});
+export default connect(mapStateToProps)(AuthorsList);

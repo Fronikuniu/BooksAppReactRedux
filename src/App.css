@@ -1,1 +1,23 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+.booklist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error-text {
+  color: tomato;
+}
+
+.booklist-item-title {
+  color: rgb(255, 134, 112);
+  font-weight: bold;
+}
+
+.booklist-item-author {
+  color: rgb(201, 128, 115);
+  font-weight: bold;
+}
+
+.booklist-item-price {
+  color: tomato;
+}

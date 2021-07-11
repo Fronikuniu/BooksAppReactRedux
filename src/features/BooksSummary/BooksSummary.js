@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 function BooksSummary({ books }) {
@@ -16,4 +17,7 @@ BooksSummary.propTypes = {
   books: PropTypes.array.isRequired,
 };
 
-export default BooksSummary;
+const mapStateToProps = (state) => ({
+  books: state.books,
+});
+export default connect(mapStateToProps)(BooksSummary);

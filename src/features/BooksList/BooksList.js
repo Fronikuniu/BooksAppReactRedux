@@ -1,25 +1,36 @@
-import PropTypes from 'prop-types';
 import { ListGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import BookItem from '../../views/BookItem/BookItem';
 import BooksForm from '../BookForm/BookForm';
 
-function BooksList({ books, addBook }) {
+function BooksList({ books, removeBook }) {
   return (
     <div>
-      <h2>BooksList</h2>
-      <ListGroup>
-        {books.map((book) => (
-          <BookItem key={book.id} book={book} />
-        ))}
-      </ListGroup>
+      <section>
+        <h2>BooksList</h2>
+        <ListGroup>
+          {books.map((book) => (
+            <BookItem key={book.id} book={book} removeBook={removeBook} />
+          ))}
+        </ListGroup>
+      </section>
 
-      <BooksForm addBook={addBook} />
+      <BooksForm />
     </div>
   );
 }
 
 BooksList.propTypes = {
   books: PropTypes.array.isRequired,
+  removeBook: PropTypes.func.isRequired,
 };
 
-export default BooksList;
+const mapStateToProps = (state) => ({
+  books: state.books,
+});
+const mapDispatchToProps = (dispatch) => ({
+  removeBook: (bookId) => dispatch({ type: 'REMOVE_BOOK', bookId }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BooksList);
