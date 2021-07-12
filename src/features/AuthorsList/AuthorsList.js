@@ -1,15 +1,22 @@
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { getAllAuthors, removeAuthorBooks } from '../../redux/store';
 
-function AuthorsList({ books }) {
-  const authors = [...new Set(books.map((book) => book.author))]; //Set() is a specially object who can have only unique data
+function AuthorsList({ authors, removeAutBooks }) {
   return (
     <section>
       <h3>Authors list</h3>
       <ListGroup>
         {authors.map((author, index) => {
-          return <ListGroupItem key={index}>{author}</ListGroupItem>;
+          return (
+            <ListGroupItem key={index} className="authorslist-item">
+              {author}{' '}
+              <Button title="Delete all author books!" variant="danger" onClick={() => removeAutBooks(author)}>
+                X
+              </Button>
+            </ListGroupItem>
+          );
         })}
       </ListGroup>
     </section>
@@ -17,10 +24,13 @@ function AuthorsList({ books }) {
 }
 
 AuthorsList.propTypes = {
-  books: PropTypes.array.isRequired,
+  authors: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  books: state.books,
+  authors: getAllAuthors(state),
 });
-export default connect(mapStateToProps)(AuthorsList);
+const mapDispatchToProps = (dispatch) => ({
+  removeAutBooks: (author) => dispatch(removeAuthorBooks(author)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorsList);

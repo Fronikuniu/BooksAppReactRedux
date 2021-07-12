@@ -1,23 +1,24 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { getCountBooks } from '../../redux/store';
 
-function BooksSummary({ books }) {
+function BooksSummary({ booksLength }) {
   return (
     <section>
       <br />
       <h3>Books Summary</h3>
       <p>
-        There is <b>{books.length}</b> {books.length === 1 ? 'book' : 'books'} in the app!
+        There is <b>{booksLength}</b> {booksLength === 1 ? 'book' : 'books'} in the app!
       </p>
     </section>
   );
 }
 
 BooksSummary.propTypes = {
-  books: PropTypes.array.isRequired,
+  booksLength: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  books: state.books,
+  booksLength: getCountBooks(state),
 });
 export default connect(mapStateToProps)(BooksSummary);

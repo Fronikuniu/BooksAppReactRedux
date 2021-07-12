@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
+import { addBook } from '../../redux/store';
 
 function BooksForm({ addBook }) {
   const {
@@ -53,6 +54,6 @@ BooksForm.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addBook: (book) => dispatch({ type: 'ADD_BOOK', book }),
+  addBook: (book) => dispatch(addBook(book)),
 });
 export default connect(null, mapDispatchToProps)(BooksForm);
