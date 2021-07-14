@@ -1,11 +1,9 @@
 import { Button, Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
-import { addBook } from '../../redux/store';
 
-function BooksForm({ addBook }) {
+function BooksForm({ addBook, addAuthor }) {
   const {
     register,
     handleSubmit,
@@ -19,6 +17,11 @@ function BooksForm({ addBook }) {
       author: data.author,
       price: data.price,
     });
+
+    addAuthor({
+      id: shortid(),
+      name: data.author,
+    });
   };
 
   return (
@@ -27,13 +30,15 @@ function BooksForm({ addBook }) {
       <Form onSubmit={handleSubmit(onSubmit)} className="mt-4">
         <FormGroup controlId="title">
           <FormLabel>Title:</FormLabel>
-          <FormControl type="text" name="title" {...register('title', { required: true, maxLength: 100 })} placeholder="Enter Title Name" />
+          <FormControl type="text" name="title" {...register('title', { required: true, minLength: 3, maxLength: 100 })} placeholder="Enter Title Name" />
           {errors.title?.type === 'required' && <p className="error-text">Title is required!</p>}
+          {errors.title?.type === ('minLength' || 'maxLength') && <p className="error-text">The Title must be between 3 and 100 characters long!</p>}
         </FormGroup>
         <FormGroup controlId="author">
           <FormLabel>Author:</FormLabel>
-          <FormControl type="text" name="author" {...register('author', { required: true, maxLength: 100 })} placeholder="Enter Author Name" />
+          <FormControl type="text" name="author" {...register('author', { required: true, minLength: 3, maxLength: 100 })} placeholder="Enter Author Name" />
           {errors.author?.type === 'required' && <p className="error-text">Author is required!</p>}
+          {errors.author?.type === ('minLength' || 'maxLength') && <p className="error-text">The Author must be between 3 and 100 characters long!</p>}
         </FormGroup>
         <FormGroup controlId="price">
           <FormLabel>Price:</FormLabel>
@@ -53,7 +58,4 @@ BooksForm.propTypes = {
   addBook: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addBook: (book) => dispatch(addBook(book)),
-});
-export default connect(null, mapDispatchToProps)(BooksForm);
+export default BooksForm;

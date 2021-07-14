@@ -1,6 +1,4 @@
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getCountBooks } from '../../redux/store';
 
 function BooksSummary({ booksLength }) {
   return (
@@ -18,7 +16,4 @@ BooksSummary.propTypes = {
   booksLength: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  booksLength: getCountBooks(state),
-});
-export default connect(mapStateToProps)(BooksSummary);
+export default BooksSummary;

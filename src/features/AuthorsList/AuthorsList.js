@@ -1,9 +1,7 @@
 import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getAllAuthors, removeAuthorBooks } from '../../redux/store';
 
-function AuthorsList({ authors, removeAutBooks }) {
+function AuthorsList({ authors, removeAutBooks, removeAuthor }) {
   return (
     <section>
       <h3>Authors list</h3>
@@ -12,7 +10,14 @@ function AuthorsList({ authors, removeAutBooks }) {
           return (
             <ListGroupItem key={index} className="authorslist-item">
               {author}{' '}
-              <Button title="Delete all author books!" variant="danger" onClick={() => removeAutBooks(author)}>
+              <Button
+                title="Delete all author books!"
+                variant="danger"
+                onClick={() => {
+                  removeAutBooks(author);
+                  removeAuthor(author);
+                }}
+              >
                 X
               </Button>
             </ListGroupItem>
@@ -27,10 +32,4 @@ AuthorsList.propTypes = {
   authors: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authors: getAllAuthors(state),
-});
-const mapDispatchToProps = (dispatch) => ({
-  removeAutBooks: (author) => dispatch(removeAuthorBooks(author)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(AuthorsList);
+export default AuthorsList;

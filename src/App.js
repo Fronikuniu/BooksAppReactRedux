@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Header from './layout/Header/Header';
-import BooksList from './features/BooksList/BooksList';
+import BooksList from './features/BooksList/BooksListContainer';
 import Sidebar from './layout/Sidebar/Sidebar';
 import './App.css';
 

@@ -1,9 +1,7 @@
 import { ListGroup } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import BookItem from '../../views/BookItem/BookItem';
-import BooksForm from '../../features/BooksForm/BooksForm';
-import { getAllBooks, removeBook } from '../../redux/store';
+import BooksForm from '../../features/BooksForm/BooksFormConatiner';
 
 function BooksList({ books, removeBook }) {
   return (
@@ -27,11 +25,4 @@ BooksList.propTypes = {
   removeBook: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  books: getAllBooks(state),
-});
-const mapDispatchToProps = (dispatch) => ({
-  removeBook: (bookId) => dispatch(removeBook(bookId)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(BooksList);
+export default BooksList;

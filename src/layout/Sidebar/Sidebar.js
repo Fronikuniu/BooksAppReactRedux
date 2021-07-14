@@ -1,5 +1,5 @@
-import AuthorsList from '../../features/AuthorsList/AuthorsList';
-import BooksSummary from '../../features/BooksSummary/BooksSummary';
+import AuthorsList from '../../features/AuthorsList/AuthorsListContainer';
+import BooksSummary from '../../features/BooksSummary/BooksSummaryContainer';
 
 function Sidebar() {
   return (
