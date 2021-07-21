@@ -5,8 +5,29 @@ import Header from './layout/Header/Header';
 import BooksList from './features/BooksList/BooksListContainer';
 import Sidebar from './layout/Sidebar/Sidebar';
 import './App.css';
+import { useEffect } from 'react';
+import { getBooks, getAuthors } from './requests/requests';
+import { connect } from 'react-redux';
+import { updateBooks } from './redux/subReducers/booksRedux';
+import { updateAuthors } from './redux/subReducers/authorsRedux';
 
-function App() {
+function App({ updateBooks, updateAuthors }) {
+  useEffect(() => {
+    getBooks()
+      .then((response) => {
+        const { data } = response;
+        updateBooks(data);
+      })
+      .catch((error) => {});
+
+    getAuthors()
+      .then((response) => {
+        const { data } = response;
+        updateAuthors(data);
+      })
+      .catch((error) => {});
+  }, [updateBooks, updateAuthors]);
+
   return (
     <Container>
       <Header />
@@ -24,4 +45,10 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateBooks: (data) => dispatch(updateBooks(data)),
+    updateAuthors: (data) => dispatch(updateAuthors(data)),
+  };
+};
+export default connect(null, mapDispatchToProps)(App);
