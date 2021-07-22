@@ -6,26 +6,14 @@ import BooksList from './features/BooksList/BooksListContainer';
 import Sidebar from './layout/Sidebar/Sidebar';
 import './App.css';
 import { useEffect } from 'react';
-import { getBooks, getAuthors } from './requests/requests';
 import { connect } from 'react-redux';
-import { updateBooks } from './redux/subReducers/booksRedux';
-import { updateAuthors } from './redux/subReducers/authorsRedux';
+import { fetchBooks } from './redux/subReducers/booksRedux';
+import { fetchAuthors } from './redux/subReducers/authorsRedux';
 
 function App({ updateBooks, updateAuthors }) {
   useEffect(() => {
-    getBooks()
-      .then((response) => {
-        const { data } = response;
-        updateBooks(data);
-      })
-      .catch((error) => {});
-
-    getAuthors()
-      .then((response) => {
-        const { data } = response;
-        updateAuthors(data);
-      })
-      .catch((error) => {});
+    updateBooks();
+    updateAuthors();
   }, [updateBooks, updateAuthors]);
 
   return (
@@ -45,10 +33,22 @@ function App({ updateBooks, updateAuthors }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateBooks: (data) => dispatch(updateBooks(data)),
-    updateAuthors: (data) => dispatch(updateAuthors(data)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  updateBooks: () => dispatch(fetchBooks()),
+  updateAuthors: () => dispatch(fetchAuthors()),
+});
+
 export default connect(null, mapDispatchToProps)(App);
+
+// How works thunk:
+// const mapDispatchToProps = (realDispatch) => {
+//   const dispatch = (action) => {
+//     if (typeof action === 'function') action(realDispatch);
+//     else realDispatch(action);
+//   };
+
+//   return ({                                     ---- we can code
+//     updateBooks: () => dispatch(fetchBooks()), ---- like this
+//     updateBooks: () => fetchBooks(dispatch),   ---- not like this
+//   });                                           ---- to save our code consistency
+// };

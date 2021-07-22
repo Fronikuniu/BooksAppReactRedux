@@ -1,11 +1,29 @@
 {
   "books": [
-    { "id": 1, "title": "Harry Potter And The Philosopher'S Stone", "author": "Rowling J. K.", "price": 10 },
-    { "id": 2, "title": "When the Body Says No", "author": "Gabor Mate", "price": 20 }
+    {
+      "id": "xJpdY2I5M",
+      "title": "Calineczka",
+      "author": "H.c. Andersen",
+      "price": "12"
+    },
+    {
+      "id": "C5BNMXiZ-",
+      "title": "Call in",
+      "author": "Gabor Mate",
+      "price": "12"
+    }
   ],
   "authors": [
-    { "id": 1, "name": "Rowling J. K." },
-    { "id": 2, "name": "Gabor Mate" }
+    {
+      "id": 1,
+      "name": "H.c. Andersen"
+    },
+    {
+      "id": 2,
+      "name": "Gabor Mate"
+    }
   ],
-  "users": { "isLogged": false }
+  "users": {
+    "isLogged": false
+  }
 }

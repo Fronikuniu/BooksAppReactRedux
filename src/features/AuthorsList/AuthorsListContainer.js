@@ -1,15 +1,15 @@
 import AuthorsList from './AuthorsList';
 import { connect } from 'react-redux';
-import { getAllAuthors, removeAuthor } from '../../redux/subReducers/authorsRedux';
-import { removeAuthorBooks } from '../../redux/subReducers/booksRedux';
+import { getAllAuthors, removeAuthorRequest } from '../../redux/subReducers/authorsRedux';
+import { removeAuthorBookRequest } from '../../redux/subReducers/booksRedux';
 
 const mapStateToProps = (state) => ({
   authors: getAllAuthors(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  removeAutBooks: (author) => dispatch(removeAuthorBooks(author)),
-  removeAuthor: (author) => dispatch(removeAuthor(author)),
+  removeAutBooks: (author) => dispatch(removeAuthorBookRequest(author)),
+  removeAuthor: (author) => dispatch(removeAuthorRequest(author)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorsList);

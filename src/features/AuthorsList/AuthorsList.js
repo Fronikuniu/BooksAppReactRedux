@@ -30,6 +30,8 @@ function AuthorsList({ authors, removeAutBooks, removeAuthor }) {
 
 AuthorsList.propTypes = {
   authors: PropTypes.array.isRequired,
+  removeAutBooks: PropTypes.func.isRequired,
+  removeAuthor: PropTypes.func.isRequired,
 };
 
 export default AuthorsList;

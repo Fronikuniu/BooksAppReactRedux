@@ -1,5 +1,7 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { initializeState } from './initialState';
+import thunk from 'redux-thunk'; // Thunk is a addon who modified our dispatch like something like on App.js component
 import authorsSubReducer from './subReducers/authorsRedux';
 import booksSubReducer from './subReducers/booksRedux';
 import usersSubReducer from './subReducers/usersRedux';
@@ -12,7 +14,7 @@ const reducers = {
 
 const reducer = combineReducers(reducers);
 
-const store = createStore(reducer, initializeState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(reducer, initializeState, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;
 
