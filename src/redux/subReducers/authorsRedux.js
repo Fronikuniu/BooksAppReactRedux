@@ -9,12 +9,14 @@ const ADD_AUTHOR = createActionName('ADD_AUTHOR');
 const REMOVE_AUTHOR = createActionName('REMOVE_AUTHOR');
 
 // Selectors - Thanks to the function of selector, changing the data structure is much more pleasant because we change only in one place
-export const updateAuthors = (payload) => ({ type: UPDATE_AUTHORS, payload });
 export const getAllAuthors = (state) => [...new Set(state.authors.map((author) => author.name))]; //Set() is a specially object who can have only unique data
+
+// Action creators
+export const updateAuthors = (payload) => ({ type: UPDATE_AUTHORS, payload });
 export const addAuthor = (payload) => ({ type: ADD_AUTHOR, payload });
 export const removeAuthor = (payload) => ({ type: REMOVE_AUTHOR, payload });
 
-//
+// Intermediary functions
 export const fetchAuthors = () => {
   return (dispatch) => {
     getAuthors()
